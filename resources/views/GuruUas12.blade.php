@@ -24,7 +24,7 @@
 </head>
 <body>
 
-
+	@if(Auth::user()->role == 'Guru')
 	@if(count($errors)>0)
 	<div class="alert alert-danger">
 		Upload Validation Error<br><br>
@@ -104,10 +104,76 @@
 						<td>{{ $row->nilai }}</td>
 					</tr>
 					@endforeach
+					@endif
 				</table>
 			</div>
 		</div>
 	</div>
+</div>
+@if(Auth::user()->role == 'Siswa')
+@if(count($errors)>0)
+<div class="alert alert-danger">
+	Upload Validation Error<br><br>
+	<ul>
+		@foreach($erros->all() as $error)
+		<li>{{error}}</li>
+		@endforeach
+	</ul>
+</div>
+@endif
+
+@if($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+	<button type="button" class="close" data-dismiss="alert">x</button>
+	<strong>{{$message}}</strong>
+</div>	
+@endif
+<button type="button" id="fab-dom-order " class="btn fa-arrow btn-primary floatingActionButton text-center">
+	BACK to TOP
+</button> 
+<form method="post" enctype="multipart/form-data" action="{{url('/GuruUas12/downloadDataUas12')}}">
+</form>
+<a href="{{ url('downloadDataUas12/xlsx') }}"><button class="btn btn-dark">Download Excel xlsx</button></a>
+
+
+<a href="/SikapSiswaKelas12Uas" class="btn btn-success my-3" target="_blank">Tampilan Sikap Siswa Kelas 12</a>
+<div class="dropdown" style="float: right;">
+	<button class="dropbtn">Tampilan Nilai</button>
+	<div class="dropdown-content">
+		<a href="GuruUts10">Nilai Uts Kelas 10</a>
+		<a href="GuruUas10">Nilai Uas Kelas 10</a>	
+		<a href="GuruUts11">Nilai Uts Kelas 11</a>
+		<a href="GuruUas11">Nilai Uas Kelas 11</a>
+		<a href="GuruUts12">Nilai Uts Kelas 12</a>
+		<a href="home">Dashboard</a>
+	</div>		
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Nilai Siswa UAS Kelas 12</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped" table id="siswa">
+				<tr>
+					<th>Name</th>
+					<th>Nis</th>
+					<th>Nilai</th>
+				</tr>
+				@foreach($data as $row)
+				<tr>
+					<td>{{ $row->nama }}</td>
+					<td>{{ $row->nis }}</td>
+					<td>{{ $row->nilai }}</td>
+				</tr>
+				@endforeach
+				@endif
+			</table>
+		</div>
+	</div>
+</div>
 </div>
 </body>
 </html>

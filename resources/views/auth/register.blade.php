@@ -61,13 +61,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{$errors->has('jabatan')?'has-error':''}}">
+                        <div class="form-group{{$errors->has('role')?'has-error':''}}">
                             <label class="col-md-4 control-label">Jabatan</label>
                             <div class="col-md-6">
-                                <select name="jabatan" class="form-control">
-                                    <option value="ADMIN">ADMIN</option>
-                                    <option value="GURU">GURU</option>
-                                    <option value="SISWA">SISWA</option>
+                                <select name="role" class="form-control">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Guru">Guru</option>
+                                    <option value="Siswa">Siswa</option>
                                 </select>
                                 
                             </div>
