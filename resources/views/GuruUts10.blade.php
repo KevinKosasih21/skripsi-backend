@@ -25,6 +25,91 @@
 
 </head>
 <body>
+	@if(Auth::user()->role == 'Admin')
+	@if(count($errors)>0)
+	<div class="alert alert-danger">
+		Upload Validation Error<br><br>
+		<ul>
+			@foreach($erros->all() as $error)
+			<li>{{error}}</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
+
+	@if($message = Session::get('success'))
+	<div class="alert alert-success alert-block">
+		<button type="button" class="close" data-dismiss="alert">x</button>
+		<strong>{{$message}}</strong>
+	</div>	
+	@endif
+	<form method="post" enctype="multipart/form-data" action="{{url('/GuruUts10/importUts')}}">
+		{{csrf_field()}}
+		<div class="form-group">
+			<table class="table">
+				<tr>
+					<td width="40%" align="right"><label>Select File for Upload</label></td>
+					<td width="30">
+						<input type="file" name="select_file" />
+					</td>
+					<td width="30%" align="left">
+						<input type="submit" name="upload" class="btn btn-primary" value="Upload">
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" align="right"></td>
+					<td width="30"><span class="text-muted">.xls, .xslx</span></td>
+					<td width="30%" align="left"></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<button type="button" id="fab-dom-order " class="btn fa-arrow btn-primary floatingActionButton text-center">
+		BACK to TOP
+	</button> 
+
+	<a href="{{ url('downloadDataUts/xlsx') }}"><button class="btn btn-dark">Download Excel xlsx</button></a>
+
+	<a href="/SikapSiswaKelas10" class="btn btn-success my-3" target="_blank">Tampilan Sikap</a>
+
+	<div class="dropdown" style="float: right;">
+		<button class="dropbtn">Tampilan Menu</button>
+		<div class="dropdown-content">
+			<a href="GuruUas10">Nilai Uas Kelas 10</a>	
+			<a href="GuruUts11">Nilai Uts Kelas 11</a>
+			<a href="GuruUas11">Nilai Uas Kelas 11</a>
+			<a href="GuruUts12">Nilai Uts Kelas 12</a>
+			<a href="GuruUas12">Nilai Uas Kelas 12</a>
+			<a href="home">Dashboard</a>
+		</div>		
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Nilai Kelas 10 UTS</h3>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped" table id="siswa">
+					<tr>
+						<th>Name</th>
+						<th>Nis</th>
+						<th>Nilai</th>
+					</tr>
+					@foreach($data as $row)
+					<tr>
+						<td>{{ $row->nama }}</td>
+						<td>{{ $row->nis }}</td>
+						<td>{{ $row->nilai }}</td>
+					</tr>
+					@endforeach
+					@endif
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 	@if(Auth::user()->role == 'Guru')
 	@if(count($errors)>0)
