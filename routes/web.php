@@ -85,3 +85,16 @@ Route::get('/' ,function(){
 		return view('auth.login');
 	}
 });
+
+//Route untuk daftar siswa kelas 10
+
+Route::get('/DaftarSiswa10UTS', 'Class10TeachersController@index');
+Route::get('/DaftarSiswa10UAS', 'Class10TeachersController@index2');
+
+//Route untuk daftar siswa kelas 11
+Route::get('DaftarSiswa11UTS', 'Class11TeachersController@index');
+Route::get('DaftarSiswa11UAS', 'Class11TeachersController@index2');
+
+//Route untuk daftar siswa kelas 12
+Route::get('DaftarSiswa12UTS', 'Class12TeachersController@index');
+Route::get('DaftarSiswa12UAS', 'Class12TeachersController@index2');
